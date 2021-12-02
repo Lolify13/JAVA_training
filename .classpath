@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="GBDESKV1/src"/>
+	<classpathentry kind="src" path="JDBC-PROJECT/src"/>
+	<classpathentry kind="src" path="ld-spring-boot-rest-crud/.mvn/wrapper"/>
+	<classpathentry excluding="dem/" kind="src" path="ld-spring-boot-rest-crud/src/main/java"/>
+	<classpathentry kind="src" path="ld-spring-boot-rest-crud/src/main/java/dem"/>
+	<classpathentry kind="lib" path="GBDESKV1/lib/mysql-connector-java-8.0.27.jar"/>
+	<classpathentry kind="lib" path="JDBC-PROJECT/lib/mysql-connector-java-8.0.27.jar"/>
+	<classpathentry kind="output" path="GBDESKV1/bin"/>
+</classpath>
