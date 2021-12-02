@@ -1,5 +1,5 @@
 
-package dem;
+package dem.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
