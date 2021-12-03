@@ -1,7 +1,13 @@
 package dem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +20,7 @@ import java.util.List;
 public class userController {
 	@Autowired
 	UserRepo userRepo;
+	
 	@GetMapping("/welcome")
 	protected String welcome() {
 		System.out.println("Welcome");
@@ -35,11 +42,46 @@ public class userController {
 		usersHTML +=	 "</table></body></html>";
 		return usersHTML;
 	}
-	@GetMapping("/users")
-	public List<Users> getAllUsers(){
-		List<Users> userList = userRepo.findAll();
-		return userList;
+	
+	// GET ALL THE USERS
+		@GetMapping("/users")
+		public List<Users> getAllUserss() {
+			List<Users> usersList = userRepo.findAll();
+			return usersList;
+		}
+	//  CREATE A NEW USER
+		@PostMapping("/users")
+		public Users createUsers(@RequestBody Users productFromBrowser) {
+			System.out.println("Inserting : " + productFromBrowser);
+			Users savedUsers = userRepo.save(productFromBrowser);
+			return savedUsers;
+		}
+	//  UPDATE EXISTING PRODUCT
+		@PutMapping("/userupdate/{id}")
+		public Users updateUsers(@PathVariable(value = "id") Long userid, @RequestBody Users productFromBrowser) {
+			System.out.println("Updating : " + productFromBrowser);
+//			fetch the product from the database with the id
+			Users existingUsers = userRepo.findById(userid).get();
+//			update the existing product with the details from the browser
+			existingUsers.setUsername(productFromBrowser.getUsername());
+			existingUsers.setPassword(productFromBrowser.getPassword());
+//			save the updated details
+			Users updatedUsers = userRepo.save(existingUsers);
+			return updatedUsers;
+		}
+		
+//		DELETE AN EXISTING PRODUCT
+		@DeleteMapping("/deleteuser/{productIdfromBrowser}")
+		public void deleteUsers(@PathVariable(value="productIdfromBrowser")Long userid) {
+			System.out.println("Deleting : " + userid);
+			userRepo.deleteById(userid);
+		}
+		
+		
+		
+		
 		
 	}
 
-}
+
+
