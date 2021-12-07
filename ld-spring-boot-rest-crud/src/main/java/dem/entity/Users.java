@@ -1,16 +1,25 @@
 
 package dem.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
+
+
+
 
 @Entity
 
 @Table(name = "USERS")
+@SecondaryTable(name = "ACCOUNT_DETAILS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "USER_ID"))
 public class Users {
 	@Id
 	@Column(name = "USER_ID")
@@ -36,14 +45,31 @@ public class Users {
 	private String contact;
 	
 	@Column(name="CREATED_AT")
-	private String createAt;
+	LocalDateTime createdAt = LocalDateTime.now();
 	
 	@Column(name="UPDATED_AT")
-	private String updateAt;
+	LocalDateTime updatedAt = LocalDateTime.now();
+	
+	@Column(name="ACCOUNT_NUMBER", table = "ACCOUNT_DETAILS")
+	private String accnumber;
+	
+	@Column(name="ACCOUNT_TYPE", table = "ACCOUNT_DETAILS")
+	private String acctype;
+	
+	@Column(name="ACCOUNT_BALANCE", table = "ACCOUNT_DETAILS")
+	private float accbal;
 	
 	
+
+	public Users() {
+		super();
+	}
+
+
+
 	public Users(Long userid, String username, String password, int numofaccounts, String listofaccounts,
-			float totalbal, String contact, String createAt, String updateAt) {
+			float totalbal, String contact, LocalDateTime createdAt, LocalDateTime updatedAt, String accnumber,
+			String acctype, float accbal) {
 		super();
 		this.userid = userid;
 		this.username = username;
@@ -52,15 +78,13 @@ public class Users {
 		this.listofaccounts = listofaccounts;
 		this.totalbal = totalbal;
 		this.contact = contact;
-		this.createAt = createAt;
-		this.updateAt = updateAt;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.accnumber = accnumber;
+		this.acctype = acctype;
+		this.accbal = accbal;
 	}
 
-
-	public Users() {
-		super();
-
-	}
 
 
 	public Long getUserid() {
@@ -68,9 +92,11 @@ public class Users {
 	}
 
 
+
 	public String getUsername() {
 		return username;
 	}
+
 
 
 	public String getPassword() {
@@ -78,9 +104,17 @@ public class Users {
 	}
 
 
+
 	public int getNumofaccounts() {
 		return numofaccounts;
 	}
+
+
+
+	public String getListofaccounts() {
+		return listofaccounts;
+	}
+
 
 
 	public float getTotalbal() {
@@ -88,19 +122,41 @@ public class Users {
 	}
 
 
+
 	public String getContact() {
 		return contact;
 	}
 
 
-	public String getCreateAt() {
-		return createAt;
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
 
 
-	public String getUpdateAt() {
-		return updateAt;
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
 	}
+
+
+
+	public String getAccnumber() {
+		return accnumber;
+	}
+
+
+
+	public String getAcctype() {
+		return acctype;
+	}
+
+
+
+	public float getAccbal() {
+		return accbal;
+	}
+
 
 
 	public void setUserid(Long userid) {
@@ -108,9 +164,11 @@ public class Users {
 	}
 
 
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 
 
 	public void setPassword(String password) {
@@ -118,9 +176,17 @@ public class Users {
 	}
 
 
+
 	public void setNumofaccounts(int numofaccounts) {
 		this.numofaccounts = numofaccounts;
 	}
+
+
+
+	public void setListofaccounts(String listofaccounts) {
+		this.listofaccounts = listofaccounts;
+	}
+
 
 
 	public void setTotalbal(float totalbal) {
@@ -128,23 +194,41 @@ public class Users {
 	}
 
 
+
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
 
 
-	public void setCreateAt(String createAt) {
-		this.createAt = createAt;
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 
 
-	public void setUpdateAt(String updateAt) {
-		this.updateAt = updateAt;
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
+
+
+
+	public void setAccnumber(String accnumber) {
+		this.accnumber = accnumber;
+	}
+
+
+
+	public void setAcctype(String acctype) {
+		this.acctype = acctype;
+	}
+
+
+
+	public void setAccbal(float accbal) {
+		this.accbal = accbal;
+	}
+
 	
-
-
-
 	
-
 }
